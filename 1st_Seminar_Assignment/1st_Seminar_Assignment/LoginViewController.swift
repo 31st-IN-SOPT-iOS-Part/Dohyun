@@ -15,7 +15,7 @@ enum LoginMode {
 final class LoginViewController: UIViewController {
     
     // MARK: - UI
-    // UI만드는 방법 1
+    
     private lazy var loginPageTitleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 30, y: 100, width:0, height: 0))
         label.text = "카카오톡을 시작합니다"
@@ -34,18 +34,25 @@ final class LoginViewController: UIViewController {
         return label
     }()
     
-    private lazy var emailTextField = KakaoTextFields.email(placeholder: "이메일").build(origin: loginButton.frame.origin)
+    private lazy var emailTextField = KakaoTextFields
+        .email(placeholder: "이메일")
+        .build(origin: loginButton.frame.origin)
 
-    private lazy var passwordTextField = KakaoTextFields.password(placeholder: "비밀번호").build(origin: loginButton.frame.origin)
+    private lazy var passwordTextField = KakaoTextFields
+        .password(placeholder: "비밀번호")
+        .build(origin: loginButton.frame.origin)
 
-    private lazy var passwordCheckTextField = KakaoTextFields.checkPassword(placeholder: "비밀번호 확인").build(origin: loginButton.frame.origin)
+    private lazy var passwordCheckTextField = KakaoTextFields
+        .checkPassword(placeholder: "비밀번호 확인")
+        .build(origin: loginButton.frame.origin)
     
-    private lazy var loginButton: UIButton = makeButton(title: "카카오계정 로그인",
-                                                        origin: CGPoint(x: 20, y: loginPageDescription.frame.height + loginPageDescription.frame.origin.y + 20)) {_ in
+    private lazy var loginButton: UIButton =
+    UIButton.makeButton(title: "카카오계정 로그인",
+               origin: CGPoint(x: 20, y: loginPageDescription.frame.height + loginPageDescription.frame.origin.y + 20)) {_ in
         
     }
     
-    private lazy var signInButton: UIButton = makeButton(title: "새로운 카카오계정 만들기", origin: CGPoint(x: 20, y: loginButton.frame.height + loginButton.frame.origin.y + 20)) { [weak self]_ in
+    private lazy var signInButton: UIButton = UIButton.makeButton(title: "새로운 카카오계정 만들기", origin: CGPoint(x: 20, y: loginButton.frame.height + loginButton.frame.origin.y + 20)) { [weak self] _ in
         self?.gotoController()
     }
     
@@ -75,10 +82,6 @@ final class LoginViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        print(#function)
     }
     
     // MARK: - LifeCycle
@@ -112,12 +115,12 @@ extension LoginViewController {
     ///   - origin: 버튼 위치를 origin으로 잡는다
     ///   - completion: 버튼이 눌린 뒤에 어떤 것을 할지?
     /// - Returns: UIButton
-    private func makeButton(title: String, origin: CGPoint, completion: ((UIAction) -> Void)? = nil) -> UIButton {
-        let size = CGSize(width: UIScreen.main.bounds.width - 40, height: 60)
-        let button = UIButton(frame: CGRect(origin: origin, size: size), primaryAction: UIAction(title: title, handler: completion ?? {_ in return}))
-        button.backgroundColor = .lightGray
-        return button
-    }
+//    private func makeButton(title: String, origin: CGPoint, completion: ((UIAction) -> Void)? = nil) -> UIButton {
+//        let size = CGSize(width: UIScreen.main.bounds.width - 40, height: 60)
+//        let button = UIButton(frame: CGRect(origin: origin, size: size), primaryAction: UIAction(title: title, handler: completion ?? {_ in return}))
+//        button.backgroundColor = .lightGray
+//        return button
+//    }
     
     private func gotoController() {
         guard let signUpViewController = AuthFlowViewControllerBuilder.signIn.buildViewController() as? LoginViewController else {return}
