@@ -11,7 +11,7 @@ enum AuthFlowViewControllerBuilder {
 
     case login
     case signIn
-    case finish
+    case finish(id: String, transition: ()->Void)
 
     func buildViewController() -> UIViewController {
         switch self {
@@ -19,8 +19,8 @@ enum AuthFlowViewControllerBuilder {
             return makeLoginViewController(mode: .login)
         case .signIn:
             return makeLoginViewController(mode: .signIn)
-        case .finish:
-            return makeFinishViewController()
+        case .finish(let id, let transition):
+            return makeFinishViewController(id: id, transition: transition)
         }
     }
 
@@ -28,8 +28,8 @@ enum AuthFlowViewControllerBuilder {
         return LoginViewController(mode: mode)
     }
     
-    private func makeFinishViewController() -> FinishViewController {
-        return FinishViewController()
+    private func makeFinishViewController(id: String, transition: @escaping (()->Void)) -> FinishViewController {
+        return FinishViewController(id: id, transition: transition)
     }
     
     
