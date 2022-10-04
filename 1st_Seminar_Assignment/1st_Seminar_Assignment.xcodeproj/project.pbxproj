@@ -15,6 +15,8 @@
 		B12A2E2A28EB035D0038426D /* AuthFlowViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A2E2928EB035D0038426D /* AuthFlowViewControllerBuilder.swift */; };
 		B12A2E2C28EB03EA0038426D /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A2E2B28EB03EA0038426D /* FinishViewController.swift */; };
 		B12A2E2E28EB12DA0038426D /* KakaoTextFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A2E2D28EB12DA0038426D /* KakaoTextFields.swift */; };
+		B12A2EA728EC97FD0038426D /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A2EA628EC97FD0038426D /* Constant.swift */; };
+		B12A2EA928ECA2390038426D /* UIButton + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B12A2EA828ECA2390038426D /* UIButton + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		B12A2E2928EB035D0038426D /* AuthFlowViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFlowViewControllerBuilder.swift; sourceTree = "<group>"; };
 		B12A2E2B28EB03EA0038426D /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
 		B12A2E2D28EB12DA0038426D /* KakaoTextFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoTextFields.swift; sourceTree = "<group>"; };
+		B12A2EA628EC97FD0038426D /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		B12A2EA828ECA2390038426D /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				B12A2E2928EB035D0038426D /* AuthFlowViewControllerBuilder.swift */,
 				B12A2E2B28EB03EA0038426D /* FinishViewController.swift */,
 				B12A2E2D28EB12DA0038426D /* KakaoTextFields.swift */,
+				B12A2EA628EC97FD0038426D /* Constant.swift */,
+				B12A2EA828ECA2390038426D /* UIButton + Extension.swift */,
 			);
 			path = 1st_Seminar_Assignment;
 			sourceTree = "<group>";
@@ -143,12 +149,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B12A2EA728EC97FD0038426D /* Constant.swift in Sources */,
 				B12A2E2C28EB03EA0038426D /* FinishViewController.swift in Sources */,
 				B12A2E2A28EB035D0038426D /* AuthFlowViewControllerBuilder.swift in Sources */,
 				B12A2E2828EAD7F70038426D /* LoginViewController.swift in Sources */,
 				B12A2E2E28EB12DA0038426D /* KakaoTextFields.swift in Sources */,
 				B12A2E1428EACEBB0038426D /* AppDelegate.swift in Sources */,
 				B12A2E1628EACEBB0038426D /* SceneDelegate.swift in Sources */,
+				B12A2EA928ECA2390038426D /* UIButton + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
