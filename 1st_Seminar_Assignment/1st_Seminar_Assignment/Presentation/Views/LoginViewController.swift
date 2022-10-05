@@ -104,7 +104,7 @@ extension LoginViewController {
     // MARK: - UI Configuartion
     private func configureView() {
         view.backgroundColor = .white
-        var component: [Any] = []
+        var component: [UIView] = []
         
         if mode == .login {
             component += [loginPageTitleLabel, loginPageDescription, emailTextField, passwordTextField, loginButton, signInButton, findIdOrPasswordButton]
@@ -113,7 +113,7 @@ extension LoginViewController {
             loginPageDescription.isHidden = true
         }
         
-        component.forEach { self.view.addSubview($0 as? UIView ?? UIView())}
+        component.forEach { self.view.addSubview($0)}
     }
     
     // MARK: - Transition Function
