@@ -24,14 +24,13 @@ enum KakaoTextFields {
         }
     }
     
-    // 커스텀
     private func makeTextField(placeholder: String, origin: CGPoint) -> UITextField {
-        let size = CGSize(width: UIScreen.main.bounds.width - 40, height: 60)
+        let size = CGSize(width: UIScreen.main.bounds.width - Constant.padding * 2, height: Constant.textFieldHeight)
         let textfield = UITextField(frame: CGRect(origin: origin, size: size))
+        textfield.underlineStyle()
         textfield.placeholder = placeholder
-        textfield.borderStyle = .none
-        textfield.textColor = .lightGray
         return textfield
     }
     
 }
+
