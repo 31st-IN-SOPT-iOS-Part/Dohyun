@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// AuthFlowViewControllerBuilder는 ViewController Factory Enum type
 enum AuthFlowViewControllerBuilder {
 
     case login
@@ -33,6 +34,8 @@ enum AuthFlowViewControllerBuilder {
     }
     
     
+    /// AuthFlow의 시작을 나타내는 함수
+    /// - Returns: LoginviewController
     static func start() -> UIViewController {
         login.buildViewController()
     }

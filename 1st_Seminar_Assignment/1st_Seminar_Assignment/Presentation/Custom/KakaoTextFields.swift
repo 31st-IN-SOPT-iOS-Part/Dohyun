@@ -13,6 +13,9 @@ enum KakaoTextFields {
     case password(placeholder: String)
     case checkPassword(placeholder: String)
     
+    /// TextField build로 textfield 객체 생성
+    /// - Parameter origin: 위치
+    /// - Returns: UITextfield
     func build(origin: CGPoint) -> UITextField {
         switch self {
         case .email(let placeholder):
