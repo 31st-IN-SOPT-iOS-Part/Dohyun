@@ -18,11 +18,7 @@ enum KakaoTextFields {
     /// - Returns: UITextfield
     func build(origin: CGPoint) -> UITextField {
         switch self {
-        case .email(let placeholder):
-            return makeTextField(placeholder: placeholder, origin: origin)
-        case .password(let placeholder):
-            return makeTextField(placeholder: placeholder, origin: origin)
-        case .checkPassword(let placeholder):
+        case .email(let placeholder), .password(let placeholder), .checkPassword(let placeholder):
             return makeTextField(placeholder: placeholder, origin: origin)
         }
     }
