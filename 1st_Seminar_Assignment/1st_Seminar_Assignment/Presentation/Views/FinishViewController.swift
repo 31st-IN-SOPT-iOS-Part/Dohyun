@@ -21,10 +21,12 @@ final class FinishViewController: UIViewController {
         return label
     }()
     
-    private lazy var confirmButton: UIButton = UIButton.makeKakaoButton(title: "확인", origin: CGPoint(x: CGFloat(Constant.padding), y: UIScreen.main.bounds.height * 1/2)) { [weak self] _ in
-        guard let self = self else {return}
-        self.gotoLoginViewController()
-    }
+    private lazy var confirmButton: UIButton =
+    KakaoButtonFactory.confirmButton(title: "확인") {
+        [weak self] _ in
+            guard let self = self else {return}
+            self.gotoLoginViewController()
+    }.build()
     
     // MARK: - Properties
     private var popNavigation: (()-> Void)
