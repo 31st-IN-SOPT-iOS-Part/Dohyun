@@ -6,27 +6,23 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
-final class FinishViewController: UIViewController {
+final class FinishViewController: NiblessViewController {
     
     // MARK: - UI
-    private let welcomeMessageLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.textAlignment = .center
-        label.text = "복숭아님\n환영합니다"
-        label.numberOfLines = 2
-        label.font = .preferredFont(forTextStyle: .largeTitle)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var welcomeMessageLabel = AuthLabelFactory.title(text: "복숭아님\n환영합니다.")
+        .build {
+            $0.numberOfLines = 2
+        }
     
-    private lazy var confirmButton: UIButton =
-    KakaoButtonFactory.confirmButton(title: "확인") {
-        [weak self] _ in
+    private lazy var confirmButton = KakaoButtonFactory
+        .confirmButton(title: "확인") { [weak self] _ in
             guard let self = self else {return}
             self.gotoLoginViewController()
-    }.build()
+        }
+        .build()
     
     // MARK: - Properties
     private var popNavigation: (()-> Void)
@@ -40,12 +36,8 @@ final class FinishViewController: UIViewController {
     // MARK: - Init
     init(id: String, transition: @escaping ()->Void) {
         self.popNavigation = transition
-        super.init(nibName: nil, bundle: nil)
+        super.init()
         self.welcomeMessageLabel.text = "\(id)님\n환영합니다"
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }
@@ -56,14 +48,24 @@ extension FinishViewController {
     
     // MARK: - UI Configuration
     private func configureViews() {
-        view.backgroundColor = .white
         [welcomeMessageLabel, confirmButton].forEach {
             self.view.addSubview($0)
         }
-        confirmButton.backgroundColor = .yellow
-        confirmButton.setTitleColor(.label, for: .normal)
-        welcomeMessageLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        welcomeMessageLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.bounds.height / 4).isActive = true
+        setupConstraint()
+    }
+    
+    private func setupConstraint() {
+        
+        welcomeMessageLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(UIScreen.main.bounds.height / 4)
+        }
+        
+        confirmButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.height.equalTo(Constant.buttonHeight)
+            make.top.equalTo(welcomeMessageLabel.snp.bottom).offset(Constant.bigGap)
+        }
         
     }
     

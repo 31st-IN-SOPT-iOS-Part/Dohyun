@@ -12,4 +12,6 @@ class Constant {
     static let buttonHeight: CGFloat = 60
     static let buttonRadius: CGFloat = 5
     static let textFieldHeight: CGFloat = 60
+    static let gap: CGFloat = 10
+    static let bigGap: CGFloat = 30
 }

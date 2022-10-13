@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 import Then
 
 enum LoginMode {
@@ -13,53 +14,53 @@ enum LoginMode {
     case signIn
 }
 
-final class LoginViewController: BaseViewController {
+final class LoginViewController: NiblessViewController {
     
     // MARK: - UI
     
-    private lazy var loginPageTitleLabel = AuthLabelFactory.title(text: "카카오톡을 시작합니다.").build()
+    private lazy var loginPageTitleLabel = AuthLabelFactory
+        .title(text: "카카오톡을 시작합니다.")
+        .build()
     
-    private lazy var loginPageDescription: UILabel = AuthLabelFactory.description(text: "사용하던 카카오계정이 있다면\n이메일 또는 전화번호로 로그인해주세요").build()
+    private lazy var loginPageDescription: UILabel = AuthLabelFactory
+        .description(text: "사용하던 카카오계정이 있다면\n이메일 또는 전화번호로 로그인해주세요")
+        .build()
     
-    private lazy var emailTextField = KakaoTextFieldFactory.email(placeholder: "이메일").build()
+    private lazy var emailTextField = KakaoTextFieldFactory
+        .email(placeholder: "이메일", borderStyle: .underline)
+        .build()
 
-    private lazy var passwordTextField = KakaoTextFieldFactory.password(placeholder: "비밀번호").build()
+    private lazy var passwordTextField = KakaoTextFieldFactory
+        .password(placeholder: "비밀번호", borderStyle: .underline)
+        .build()
 
     private lazy var passwordCheckTextField = KakaoTextFieldFactory
-        .checkPassword(placeholder: "비밀번호 확인").build()
-
+        .checkPassword(placeholder: "비밀번호 확인", borderStyle: .underline)
+        .build()
+        
+    private lazy var loginButton: UIButton = KakaoButtonFactory
+        .defaultButton(title: "카카오계정 로그인")
+        .build()
     
-    private lazy var loginButton: UIButton = KakaoButtonFactory.defaultButton(title: "카카오계정 로그인") {
-        [weak self] _ in
-            if self?.mode == .login {
-                self?.gotoSignUpViewController()
-            } else {
-                self?.gotoFinishViewController()
-            }
-    }.build()
-    
-    private lazy var signInButton: UIButton = KakaoButtonFactory.defaultButton(title:  "새로운 카카오계정 만들기").build()
+    private lazy var signInButton: UIButton = KakaoButtonFactory
+        .defaultButton(title:  "새로운 카카오계정 만들기"){
+            [weak self] _ in self?.mode == .login ? self?.gotoSignUpViewController() : self?.gotoFinishViewController()}
+        .build()
     
     
     // iOS 15+ 부터 할 수 있는 방법으로 해보기
-    private lazy var findIdOrPasswordButton = KakaoButtonFactory.noBorderButton(title: "카카오계정 또는 비밀번호 찾기").build()
+    private lazy var findIdOrPasswordButton = KakaoButtonFactory
+        .noBorderButton(title: "카카오계정 또는 비밀번호 찾기")
+        .build()
     
     // MARK: -  Private Properties
-    private var mode = LoginMode.login {
-        didSet {
-            loginPageDescription.isHidden = mode == .login ? false : true
-        }
-    }
+    private var mode = LoginMode.login
     
     // MARK: - Initialization
     
     init(mode: LoginMode) {
-        super.init(nibName: nil, bundle: nil)
+        super.init()
         self.mode = mode
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - LifeCycle
@@ -75,18 +76,60 @@ extension LoginViewController {
     
     // MARK: - UI Configuartion
     private func configureView() {
-        
-        if mode == .login {
-            component += [loginPageTitleLabel, loginPageDescription, emailTextField, passwordTextField, loginButton, signInButton, findIdOrPasswordButton]
-        } else {
-            component += [loginPageTitleLabel, loginPageDescription, emailTextField, passwordTextField, passwordCheckTextField, signInButton]
-            loginPageDescription.isHidden = true
-        }
+        component += [loginPageTitleLabel, loginPageDescription, emailTextField, passwordTextField, loginButton, signInButton, findIdOrPasswordButton, passwordCheckTextField]
         component.forEach { self.view.addSubview($0) }
+        setupConstraint()
+    }
+    
+    // MARK: - UI Autolayout
+    
+    private func setupConstraint() {
         
+        loginPageTitleLabel.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(Constant.bigGap)
+        }
         
+        loginPageDescription.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.top.equalTo(loginPageTitleLabel.snp.bottom).offset(Constant.bigGap)
+            if mode == .signIn {
+                make.height.equalTo(0)
+            }
+        }
+        
+        emailTextField.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.top.equalTo(loginPageDescription.snp.bottom).offset(Constant.gap)
+            make.height.equalTo(Constant.textFieldHeight)
+        }
+        
+        passwordTextField.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.top.equalTo(emailTextField.snp.bottom).offset(Constant.gap)
+            make.height.equalTo(Constant.textFieldHeight)
+        }
+        
+        passwordCheckTextField.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(Constant.gap)
+            make.height.equalTo(mode == .login ? 0 : Constant.textFieldHeight)
+        }
+        
+        loginButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.height.equalTo(Constant.buttonHeight)
+            make.top.equalTo(passwordCheckTextField.snp.bottom).offset(Constant.bigGap)
+        }
+        
+        signInButton.snp.makeConstraints { make in
+            make.left.right.equalToSuperview().inset(Constant.padding)
+            make.height.equalTo(Constant.buttonHeight)
+            make.top.equalTo(loginButton.snp.bottom).offset(Constant.gap)
+        }
         
     }
+    
     
     // MARK: - Transition Function
     

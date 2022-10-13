@@ -21,8 +21,9 @@
 		B138766228F723B50091E36A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B138766128F723B50091E36A /* Then */; };
 		B19A554A28ED3F1A00EE11A1 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A554928ED3F1A00EE11A1 /* UITextField + Extension.swift */; };
 		B1AAA72428F81F0F006F7550 /* AuthLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72328F81F0F006F7550 /* AuthLabelFactory.swift */; };
-		B1AAA72628F81F25006F7550 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72528F81F25006F7550 /* BaseViewController.swift */; };
+		B1AAA72628F81F25006F7550 /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72528F81F25006F7550 /* NiblessViewController.swift */; };
 		B1AAA72828F820FE006F7550 /* KakaoButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72728F820FE006F7550 /* KakaoButtonFactory.swift */; };
+		B1AAA72C28F8438F006F7550 /* Buildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72B28F8438E006F7550 /* Buildable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +41,9 @@
 		B12A2EA828ECA2390038426D /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
 		B19A554928ED3F1A00EE11A1 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
 		B1AAA72328F81F0F006F7550 /* AuthLabelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLabelFactory.swift; sourceTree = "<group>"; };
-		B1AAA72528F81F25006F7550 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B1AAA72528F81F25006F7550 /* NiblessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessViewController.swift; sourceTree = "<group>"; };
 		B1AAA72728F820FE006F7550 /* KakaoButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoButtonFactory.swift; sourceTree = "<group>"; };
+		B1AAA72B28F8438E006F7550 /* Buildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buildable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +112,6 @@
 			children = (
 				B12A2E2728EAD7F70038426D /* LoginViewController.swift */,
 				B12A2E2B28EB03EA0038426D /* FinishViewController.swift */,
-				B1AAA72528F81F25006F7550 /* BaseViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -121,6 +122,7 @@
 				B12A2E2D28EB12DA0038426D /* KakaoTextFieldFactory.swift */,
 				B1AAA72328F81F0F006F7550 /* AuthLabelFactory.swift */,
 				B1AAA72728F820FE006F7550 /* KakaoButtonFactory.swift */,
+				B1AAA72B28F8438E006F7550 /* Buildable.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -138,6 +140,7 @@
 			children = (
 				B12A2EA628EC97FD0038426D /* Constant.swift */,
 				B12A2EA828ECA2390038426D /* UIButton + Extension.swift */,
+				B1AAA72528F81F25006F7550 /* NiblessViewController.swift */,
 				B19A554928ED3F1A00EE11A1 /* UITextField + Extension.swift */,
 			);
 			path = Global;
@@ -223,7 +226,7 @@
 			files = (
 				B12A2EA728EC97FD0038426D /* Constant.swift in Sources */,
 				B12A2E2C28EB03EA0038426D /* FinishViewController.swift in Sources */,
-				B1AAA72628F81F25006F7550 /* BaseViewController.swift in Sources */,
+				B1AAA72628F81F25006F7550 /* NiblessViewController.swift in Sources */,
 				B12A2E2A28EB035D0038426D /* AuthFlowViewControllerBuilder.swift in Sources */,
 				B1AAA72428F81F0F006F7550 /* AuthLabelFactory.swift in Sources */,
 				B12A2E2828EAD7F70038426D /* LoginViewController.swift in Sources */,
@@ -233,6 +236,7 @@
 				B12A2E1628EACEBB0038426D /* SceneDelegate.swift in Sources */,
 				B12A2EA928ECA2390038426D /* UIButton + Extension.swift in Sources */,
 				B19A554A28ED3F1A00EE11A1 /* UITextField + Extension.swift in Sources */,
+				B1AAA72C28F8438F006F7550 /* Buildable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

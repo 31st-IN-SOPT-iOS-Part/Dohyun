@@ -25,8 +25,13 @@ enum KakaoButtonFactory: Buildable {
     
     private func makeKakaoButton() -> UIButton {
         switch self {
-        case .confirmButton(let title, let completion),  .defaultButton(let title, completion: let completion):
+        case .defaultButton(let title, completion: let completion):
             return UIButton.makeKakaoButton(title: title, completion: completion)
+        case .confirmButton(let title, let completion):
+            return UIButton.makeKakaoButton(title: title, completion: completion).then {
+                $0.backgroundColor = .yellow
+                $0.setTitleColor(.label, for: .normal)
+            }
         case .noBorderButton(let title, let completion):
             let button = UIButton.makeKakaoButton(title: title, completion: completion)
             button.setTitleColor(.lightGray, for: .normal)
