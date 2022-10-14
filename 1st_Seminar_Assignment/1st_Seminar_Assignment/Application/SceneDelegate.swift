@@ -18,7 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
         
-        let navigationViewController = UINavigationController(rootViewController: AuthFlowViewControllerBuilder.start())
+//        let navigationViewController = UINavigationController(rootViewController: AuthFlowViewControllerBuilder.start())
+        let navigationViewController = FriendTableViewController()
         
         window.rootViewController = navigationViewController
         window.makeKeyAndVisible()
