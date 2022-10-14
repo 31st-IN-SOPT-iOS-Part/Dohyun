@@ -24,6 +24,9 @@ extension Int {
 }
 
 class Constant {
+    
+    // 조만간 네임스페이스를 나눠야할듯
+    
     static let padding: CGFloat = 20.adjusted
     static let buttonHeight: CGFloat = 60.adjusted
     static let buttonRadius: CGFloat = 5.adjusted
@@ -31,4 +34,11 @@ class Constant {
     static let gap: CGFloat = 10.adjusted
     static let bigGap: CGFloat = 30.adjusted
     static let navigationBarHeight: CGFloat = 44.adjusted
+    static let profileImageHeight: CGFloat = 60.adjusted
+    
+    enum ProfileConstant {
+        static var imageSize = 97.adjusted
+        static var buttonImagePadding = 9.adjusted
+    }
+    
 }

@@ -17,7 +17,13 @@ extension UIButton {
     static func makeKakaoButton(title: String, completion: ((UIAction) -> Void)? = nil) -> UIButton {
         let button = UIButton(frame: CGRect(), primaryAction: UIAction(title: title, handler: completion ?? {_ in return}))
         button.layer.cornerRadius = Constant.buttonRadius
-        button.backgroundColor = .lightGray
+        return button
+    }
+    
+    static func makeKakaoButton(image: UIImage, completion: ((UIAction) -> Void)? = nil) -> UIButton {
+        let button = UIButton(frame: CGRect(), primaryAction: UIAction(handler: completion ?? {_ in return}))
+        button.setBackgroundImage(image, for: .normal)
+        button.layer.cornerRadius = Constant.buttonRadius
         return button
     }
 }

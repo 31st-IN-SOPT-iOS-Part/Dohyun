@@ -20,7 +20,7 @@
 		B138765D28F717970091E36A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B138765C28F717970091E36A /* SnapKit */; };
 		B138766228F723B50091E36A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B138766128F723B50091E36A /* Then */; };
 		B19A554A28ED3F1A00EE11A1 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A554928ED3F1A00EE11A1 /* UITextField + Extension.swift */; };
-		B1AAA72428F81F0F006F7550 /* AuthLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72328F81F0F006F7550 /* AuthLabelFactory.swift */; };
+		B1AAA72428F81F0F006F7550 /* KakaoLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72328F81F0F006F7550 /* KakaoLabelFactory.swift */; };
 		B1AAA72628F81F25006F7550 /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72528F81F25006F7550 /* NiblessViewController.swift */; };
 		B1AAA72828F820FE006F7550 /* KakaoButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72728F820FE006F7550 /* KakaoButtonFactory.swift */; };
 		B1AAA72C28F8438F006F7550 /* Buildable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72B28F8438E006F7550 /* Buildable.swift */; };
@@ -31,6 +31,7 @@
 		B1AAA73928F84BF2006F7550 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA73828F84BF2006F7550 /* ProfileViewModel.swift */; };
 		B1AAA73D28F84EE1006F7550 /* KakaoNavigationViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA73C28F84EE1006F7550 /* KakaoNavigationViewFactory.swift */; };
 		B1AAA73F28F92CD2006F7550 /* KakaoNavigatorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA73E28F92CD2006F7550 /* KakaoNavigatorBar.swift */; };
+		B1AAA74128F93886006F7550 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA74028F93886006F7550 /* UIView+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +48,7 @@
 		B12A2EA628EC97FD0038426D /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B12A2EA828ECA2390038426D /* UIButton + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton + Extension.swift"; sourceTree = "<group>"; };
 		B19A554928ED3F1A00EE11A1 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
-		B1AAA72328F81F0F006F7550 /* AuthLabelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLabelFactory.swift; sourceTree = "<group>"; };
+		B1AAA72328F81F0F006F7550 /* KakaoLabelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoLabelFactory.swift; sourceTree = "<group>"; };
 		B1AAA72528F81F25006F7550 /* NiblessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NiblessViewController.swift; sourceTree = "<group>"; };
 		B1AAA72728F820FE006F7550 /* KakaoButtonFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoButtonFactory.swift; sourceTree = "<group>"; };
 		B1AAA72B28F8438E006F7550 /* Buildable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buildable.swift; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 		B1AAA73828F84BF2006F7550 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		B1AAA73C28F84EE1006F7550 /* KakaoNavigationViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoNavigationViewFactory.swift; sourceTree = "<group>"; };
 		B1AAA73E28F92CD2006F7550 /* KakaoNavigatorBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoNavigatorBar.swift; sourceTree = "<group>"; };
+		B1AAA74028F93886006F7550 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				B12A2E2D28EB12DA0038426D /* KakaoTextFieldFactory.swift */,
-				B1AAA72328F81F0F006F7550 /* AuthLabelFactory.swift */,
+				B1AAA72328F81F0F006F7550 /* KakaoLabelFactory.swift */,
 				B1AAA72728F820FE006F7550 /* KakaoButtonFactory.swift */,
 				B1AAA72B28F8438E006F7550 /* Buildable.swift */,
 				B1AAA73C28F84EE1006F7550 /* KakaoNavigationViewFactory.swift */,
@@ -159,6 +161,7 @@
 				B12A2EA828ECA2390038426D /* UIButton + Extension.swift */,
 				B1AAA72528F81F25006F7550 /* NiblessViewController.swift */,
 				B19A554928ED3F1A00EE11A1 /* UITextField + Extension.swift */,
+				B1AAA74028F93886006F7550 /* UIView+Extension.swift */,
 			);
 			path = Global;
 			sourceTree = "<group>";
@@ -292,7 +295,7 @@
 				B1AAA73528F84BD8006F7550 /* SignInViewModel.swift in Sources */,
 				B12A2E2A28EB035D0038426D /* AuthFlowViewControllerBuilder.swift in Sources */,
 				B1AAA73728F84BE6006F7550 /* FriendTableViewModel.swift in Sources */,
-				B1AAA72428F81F0F006F7550 /* AuthLabelFactory.swift in Sources */,
+				B1AAA72428F81F0F006F7550 /* KakaoLabelFactory.swift in Sources */,
 				B12A2E2828EAD7F70038426D /* LoginViewController.swift in Sources */,
 				B1AAA72828F820FE006F7550 /* KakaoButtonFactory.swift in Sources */,
 				B12A2E2E28EB12DA0038426D /* KakaoTextFieldFactory.swift in Sources */,
@@ -300,6 +303,7 @@
 				B12A2E1428EACEBB0038426D /* AppDelegate.swift in Sources */,
 				B1AAA73928F84BF2006F7550 /* ProfileViewModel.swift in Sources */,
 				B12A2E1628EACEBB0038426D /* SceneDelegate.swift in Sources */,
+				B1AAA74128F93886006F7550 /* UIView+Extension.swift in Sources */,
 				B12A2EA928ECA2390038426D /* UIButton + Extension.swift in Sources */,
 				B1AAA73028F84B63006F7550 /* ProfileViewController.swift in Sources */,
 				B1AAA73F28F92CD2006F7550 /* KakaoNavigatorBar.swift in Sources */,

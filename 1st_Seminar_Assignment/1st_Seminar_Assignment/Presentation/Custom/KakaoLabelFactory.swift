@@ -8,12 +8,13 @@
 
 import UIKit
 
-enum AuthLabelFactory: Buildable {
+enum KakaoLabelFactory: Buildable {
     
     typealias ViewType = UILabel
     
     case title(text: String)
     case description(text: String)
+    case name(text: String)
     
     func build(_ config: ((UILabel) -> Void)?=nil) -> UILabel {
         var label = makeAuthLabel()
@@ -36,6 +37,10 @@ enum AuthLabelFactory: Buildable {
             label.text = text
             label.numberOfLines  = 2
             label.textColor = .lightGray
+        case .name(let text):
+            label.text = text
+            label.textColor = .white
+            label.font = .preferredFont(forTextStyle: .headline)
         }
         return label
     }

@@ -16,13 +16,13 @@ enum LoginMode {
 
 final class LoginViewController: NiblessViewController {
     
-    // MARK: - UI
+    // MARK: - UI Properties
     
-    private lazy var loginPageTitleLabel = AuthLabelFactory
+    private lazy var loginPageTitleLabel = KakaoLabelFactory
         .title(text: "카카오톡을 시작합니다.")
         .build()
     
-    private lazy var loginPageDescription: UILabel = AuthLabelFactory
+    private lazy var loginPageDescription: UILabel = KakaoLabelFactory
         .description(text: "사용하던 카카오계정이 있다면\n이메일 또는 전화번호로 로그인해주세요")
         .build()
     

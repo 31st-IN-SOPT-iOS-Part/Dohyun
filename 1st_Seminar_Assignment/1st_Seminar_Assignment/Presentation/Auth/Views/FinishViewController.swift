@@ -12,7 +12,7 @@ import Then
 final class FinishViewController: NiblessViewController {
     
     // MARK: - UI
-    private lazy var welcomeMessageLabel = AuthLabelFactory.title(text: "복숭아님\n환영합니다.")
+    private lazy var welcomeMessageLabel = KakaoLabelFactory.title(text: "복숭아님\n환영합니다.")
         .build {
             $0.numberOfLines = 2
         }

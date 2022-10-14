@@ -9,9 +9,19 @@ import UIKit
 
 final class FriendTableViewController: NiblessViewController {
     
+    // MARK: - UI Properties
     
-    lazy var navigationBar = KakaoNavigationViewFactory.home(navTitle: "친구", barViews: [.setting, .setting, .flexibleView, ]).build()
+    private lazy var navigationBar = KakaoNavigationViewFactory.home(navTitle: "친구", barViews: [.smallGap(width: 5), .setting, .flexibleView]).build()
+    
+    private lazy var profileView = KakaoButtonFactory.profileButton(image: UIImage(named: "profile_userImg")!) { _ in
+        let vc = ProfileViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+    }.build()
 
+    
+    // MARK: - LifeCycle & Init
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -23,10 +33,13 @@ final class FriendTableViewController: NiblessViewController {
 
 }
 
+
+// MARK: - Setting UI
+
 extension FriendTableViewController {
     
     private func configureView() {
-        component += [navigationBar]
+        component += [navigationBar, profileView]
         component.forEach { view.addSubview($0)}
         setupConstraint()
     }
@@ -35,6 +48,12 @@ extension FriendTableViewController {
         navigationBar.snp.makeConstraints { make in
             make.height.equalTo(Constant.navigationBarHeight)
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        profileView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(Constant.padding)
+            make.top.equalTo(navigationBar.snp.bottom).offset(Constant.bigGap)
+            make.width.height.equalTo(Constant.profileImageHeight)
         }
     }
 }

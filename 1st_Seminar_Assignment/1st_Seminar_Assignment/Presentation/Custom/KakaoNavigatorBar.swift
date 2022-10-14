@@ -9,10 +9,14 @@ import UIKit
 
 class KakaoNavigationBar: UIView {
     
-    var viewType: KakaoNavigationViewFactory
+    typealias buttonAction = (UIAction) -> Void
     
-    init(frame: CGRect, viewType: KakaoNavigationViewFactory) {
+    var viewType: KakaoNavigationViewFactory
+    var actions: [buttonAction]
+    
+    init(frame: CGRect, viewType: KakaoNavigationViewFactory, completions: [buttonAction] = []) {
         self.viewType = viewType
+        self.actions = completions
         super.init(frame: frame)
         configureView()
     }
@@ -24,9 +28,10 @@ class KakaoNavigationBar: UIView {
     private func configureView(){
         
         var flexIndex = 1
+        var smallGapIdx: [Int] = []
         
         switch viewType {
-        case .home(let navTitle, let barViews):
+        case .home(let navTitle, let barViews, _):
             
             let label = UILabel().then {
                 $0.text = navTitle
@@ -35,16 +40,30 @@ class KakaoNavigationBar: UIView {
             }
             
             var navibarViews = barViews.enumerated().map { (index, view) -> UIView in
-                if view != .flexibleView {
-                    return UIButton().then {
-                        $0.setBackgroundImage(view.image!, for: .normal)
+               
+                switch view {
+                case .smallGap(let width):
+                    return UIView().then {
+                        $0.backgroundColor = .clear
+                        $0.snp.makeConstraints { make in
+                            make.width.equalTo(width)
+                        }
                         $0.setContentHuggingPriority(.required, for: .horizontal)
+                        smallGapIdx.append(index+1)
                     }
-                } else {
+                case .flexibleView:
                     flexIndex += index
                     return UIView().then {
                         $0.backgroundColor = .clear
                         $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
+                    }
+                case .setting, .xbutton:
+                    return UIButton().then {
+                        $0.setBackgroundImage(view.image!, for: .normal)
+                        $0.setContentHuggingPriority(.required, for: .horizontal)
+                        guard !actions.isEmpty else {return}
+                        let action = actions.removeFirst()
+                        $0.addAction(UIAction(handler: action), for: .touchUpInside)
                     }
                 }
             }
@@ -62,7 +81,9 @@ class KakaoNavigationBar: UIView {
                     view.snp.makeConstraints { make in
                         make.top.bottom.equalToSuperview().inset(Constant.gap)
                         if index != flexIndex && index != 0 {
-                            make.width.equalTo(Constant.navigationBarHeight - Constant.gap * 2)
+                            if !smallGapIdx.contains(index) {
+                                make.width.equalTo(Constant.navigationBarHeight - Constant.gap * 2)
+                            }
                         }
                 }
             }
