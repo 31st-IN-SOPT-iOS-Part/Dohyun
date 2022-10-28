@@ -16,7 +16,7 @@ enum KakaoNavigationViewFactory: Buildable {
     enum KakaoNavigationItemView {
         
         case setting
-        case label(content: UILabel)
+        case title(content: String)
         case xbutton(color: UIColor)
         case flexibleView
         case smallGap(width: CGFloat)
@@ -27,7 +27,7 @@ enum KakaoNavigationViewFactory: Buildable {
                 return UIImage(systemName: "gearshape.fill")!.withTintColor(.black, renderingMode: .alwaysOriginal)
             case .xbutton(let color):
                 return UIImage(systemName: "xmark")!.withTintColor(color, renderingMode: .alwaysOriginal)
-            case .flexibleView, .smallGap(_), .label:
+            case .flexibleView, .smallGap(_), .title:
                 return nil
             }
         }

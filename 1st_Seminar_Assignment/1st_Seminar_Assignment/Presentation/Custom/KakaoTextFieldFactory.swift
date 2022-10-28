@@ -18,13 +18,11 @@ enum KakaoTextFieldFactory: Buildable {
         case round
     }
 
-    case email(placeholder: String, borderStyle: TextfieldBorderStyle)
-    case password(placeholder: String, borderStyle: TextfieldBorderStyle)
-    case checkPassword(placeholder: String, borderStyle: TextfieldBorderStyle)
+    case formStyleTextfield(placeholder: String, borderStyle: TextfieldBorderStyle)
 
     func build(_ config: ((ViewType) -> Void)? = nil) -> ViewType {
         switch self {
-        case .email(let placeholder, let borderStyle), .password(let placeholder, let borderStyle), .checkPassword(let placeholder, let borderStyle):
+        case .formStyleTextfield(let placeholder, let borderStyle):
             var textfield =  makeTextField(placeholer: placeholder, borderstyle: borderStyle)
             if let config = config {
                 textfield = textfield.then(config)

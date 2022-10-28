@@ -12,10 +12,7 @@ final class FriendTableViewController: NiblessViewController {
     // MARK: - UI Properties
     
     private lazy var navigationBar = KakaoNavigationViewFactory.home(
-        barViews: [.flexibleView, .label(content: UILabel().then({
-            $0.text = "HELLO"
-            $0.font = .preferredFont(forTextStyle: .title1)
-        })), .flexibleView]).build()
+        barViews: [.flexibleView, .title(content: "HELLO"),.flexibleView]).build()
     
     private lazy var profileView = KakaoButtonFactory.profileButton(image: UIImage(named: "profile_userImg")!) { _ in
         let vc = ProfileViewController()
@@ -30,12 +27,6 @@ final class FriendTableViewController: NiblessViewController {
         super.viewDidLoad()
         configureView()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        navigationBar.subviews[0].subviews.forEach{ print($0.frame.width)}
-    }
-    
     
     override init() {
         super.init()

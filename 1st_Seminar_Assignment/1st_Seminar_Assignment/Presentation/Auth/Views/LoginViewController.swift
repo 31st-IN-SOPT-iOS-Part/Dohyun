@@ -27,15 +27,15 @@ final class LoginViewController: NiblessViewController {
         .build()
     
     private lazy var emailTextField = KakaoTextFieldFactory
-        .email(placeholder: "이메일", borderStyle: .underline)
+        .formStyleTextfield(placeholder: "이메일", borderStyle: .underline)
         .build()
 
     private lazy var passwordTextField = KakaoTextFieldFactory
-        .password(placeholder: "비밀번호", borderStyle: .underline)
+        .formStyleTextfield(placeholder: "비밀번호", borderStyle: .underline)
         .build()
 
     private lazy var passwordCheckTextField = KakaoTextFieldFactory
-        .checkPassword(placeholder: "비밀번호 확인", borderStyle: .underline)
+        .formStyleTextfield(placeholder: "비밀번호 확인", borderStyle: .underline)
         .build()
         
     private lazy var loginButton: UIButton = KakaoButtonFactory
