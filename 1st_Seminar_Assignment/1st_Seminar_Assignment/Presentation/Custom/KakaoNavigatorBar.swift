@@ -53,7 +53,7 @@ final class KakaoNavigationBar: UIView {
                         }
                         
                         $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-                        $0.setContentHuggingPriority(.required, for: .horizontal)
+//                        $0.setContentHuggingPriority(.required, for: .horizontal)
                         
                         smallGapIdx.append(index)
                     }
@@ -61,10 +61,8 @@ final class KakaoNavigationBar: UIView {
                     flexIndex.append(index)
                     return UIView().then {
                         $0.backgroundColor = .red
-                        viewWidth.append(0)
-                        
                         $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
-                        $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+//                        $0.setContentCompressionResistancePriority(.required, for: .horizontal)
                     }
                 case .setting, .xbutton:
                     return UIButton().then {
@@ -73,7 +71,7 @@ final class KakaoNavigationBar: UIView {
                             make.width.equalTo(Constant.navigationBarHeight - Constant.gap * 2)
                         }
                         $0.setContentHuggingPriority(.required, for: .horizontal)
-                        $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+//                        $0.setContentCompressionResistancePriority(.required, for: .horizontal)
                         viewWidth.append(Constant.navigationBarHeight - Constant.gap * 2)
                         guard !actions.isEmpty else {return}
                         let action = actions.removeFirst()
@@ -94,7 +92,8 @@ final class KakaoNavigationBar: UIView {
                     view.snp.makeConstraints { make in
                         make.top.bottom.equalToSuperview().inset(Constant.gap)
                         if flexIndex.contains(index) {
-                            make.width.equalToSuperview().offset(-(viewWidth.reduce(0, +) / 2)).dividedBy(2)
+                            
+                            make.width.equalToSuperview().offset(-(viewWidth.reduce(0, +) / CGFloat(viewWidth.count + 1))).dividedBy(flexIndex.count)
                         }
                 }
             }
