@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KakaoNavigationBar: UIView {
+final class KakaoNavigationBar: UIView {
     
     typealias buttonAction = (UIAction) -> Void
     
@@ -29,35 +29,52 @@ class KakaoNavigationBar: UIView {
         
         var flexIndex: [Int] = []
         var smallGapIdx: [Int] = []
+        var viewWidth: [CGFloat]  = []
         
         switch viewType {
         case .home(let barViews, _):
-        
-            var navibarViews = barViews.enumerated().map { (index, view) -> UIView in
-               
+            let navibarViews = barViews.enumerated().map { (index, view) -> UIView in
                 switch view {
                 case .label(let content):
+                    viewWidth.append(content.intrinsicContentSize.width)
+                    content.snp.makeConstraints { make in
+                        make.width.equalTo(content.intrinsicContentSize.width)
+                    }
+                    content.setContentCompressionResistancePriority(.required, for: .horizontal)
+                    content.setContentHuggingPriority(.required, for: .horizontal)
                     return content
+                    
                 case .smallGap(let width):
+                    viewWidth.append(width)
                     return UIView().then {
-                        $0.backgroundColor = .clear
+                        $0.backgroundColor = .blue
                         $0.snp.makeConstraints { make in
                             make.width.equalTo(width)
                         }
+                        
+                        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
                         $0.setContentHuggingPriority(.required, for: .horizontal)
-                        smallGapIdx.append(index+1)
+                        
+                        smallGapIdx.append(index)
                     }
                 case .flexibleView:
-                    flexIndex.append(index + 1)
-                    print(flexIndex)
+                    flexIndex.append(index)
                     return UIView().then {
-                        $0.backgroundColor = .clear
+                        $0.backgroundColor = .red
+                        viewWidth.append(0)
+                        
                         $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
+                        $0.setContentCompressionResistancePriority(.required, for: .horizontal)
                     }
                 case .setting, .xbutton:
                     return UIButton().then {
                         $0.setBackgroundImage(view.image!, for: .normal)
+                        $0.snp.makeConstraints { make in
+                            make.width.equalTo(Constant.navigationBarHeight - Constant.gap * 2)
+                        }
                         $0.setContentHuggingPriority(.required, for: .horizontal)
+                        $0.setContentCompressionResistancePriority(.required, for: .horizontal)
+                        viewWidth.append(Constant.navigationBarHeight - Constant.gap * 2)
                         guard !actions.isEmpty else {return}
                         let action = actions.removeFirst()
                         $0.addAction(UIAction(handler: action), for: .touchUpInside)
@@ -76,23 +93,21 @@ class KakaoNavigationBar: UIView {
                 .subviews.enumerated().forEach { (index, view) in
                     view.snp.makeConstraints { make in
                         make.top.bottom.equalToSuperview().inset(Constant.gap)
-                        // 
                         if flexIndex.contains(index) {
-                            if !smallGapIdx.contains(index) {
-                                make.width.equalTo(Constant.navigationBarHeight - Constant.gap * 2)
-                            }
+                            make.width.equalToSuperview().offset(-(viewWidth.reduce(0, +) / 2)).dividedBy(2)
                         }
                 }
             }
-            
             
             self.addSubview(navigationStackView)
             navigationStackView.snp.makeConstraints { make in
                 make.left.right.equalToSuperview().inset(Constant.padding)
                 make.top.bottom.equalToSuperview()
             }
-
+            
+        
         }
+        
     }
     
     
