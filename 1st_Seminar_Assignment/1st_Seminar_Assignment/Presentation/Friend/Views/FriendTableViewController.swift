@@ -11,7 +11,10 @@ final class FriendTableViewController: NiblessViewController {
     
     // MARK: - UI Properties
     
-    private lazy var navigationBar = KakaoNavigationViewFactory.home(navTitle: "친구", barViews: [.smallGap(width: 5), .setting, .flexibleView]).build()
+    private lazy var navigationBar = KakaoNavigationViewFactory.home(
+        barViews: [.label(content: UILabel().then{ $0.text = "친구"
+            $0.font = .preferredFont(forTextStyle: .title1)
+        }),.smallGap(width: 5), .setting, .flexibleView]).build()
     
     private lazy var profileView = KakaoButtonFactory.profileButton(image: UIImage(named: "profile_userImg")!) { _ in
         let vc = ProfileViewController()

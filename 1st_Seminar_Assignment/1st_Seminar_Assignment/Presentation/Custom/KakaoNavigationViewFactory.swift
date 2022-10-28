@@ -11,11 +11,12 @@ enum KakaoNavigationViewFactory: Buildable {
     
     typealias ViewType = UIView
     
-    case home(navTitle: String? = nil, barViews: [KakaoNavigationItemView], completions: [(UIAction) -> Void] = [])
+    case home(barViews: [KakaoNavigationItemView], completions: [(UIAction) -> Void] = [])
     
     enum KakaoNavigationItemView {
         
         case setting
+        case label(content: UILabel)
         case xbutton(color: UIColor)
         case flexibleView
         case smallGap(width: CGFloat)
@@ -26,7 +27,7 @@ enum KakaoNavigationViewFactory: Buildable {
                 return UIImage(systemName: "gearshape.fill")!.withTintColor(.black, renderingMode: .alwaysOriginal)
             case .xbutton(let color):
                 return UIImage(systemName: "xmark")!.withTintColor(color, renderingMode: .alwaysOriginal)
-            case .flexibleView, .smallGap(_):
+            case .flexibleView, .smallGap(_), .label:
                 return nil
             }
         }
@@ -34,9 +35,8 @@ enum KakaoNavigationViewFactory: Buildable {
     
     func build(_ config: ((UIView) -> Void)? = nil) -> UIView {
         switch self {
-        case .home(let navTitle, let barbuttons, let completions):
-            var navView = makeNavigationView(title: navTitle,
-                                             barViews: barbuttons, completions: completions)
+        case .home(let barbuttons, let completions):
+            var navView = makeNavigationView(barViews: barbuttons, completions: completions)
             if let config = config {
                 navView = navView.then(config)
             }
@@ -44,7 +44,7 @@ enum KakaoNavigationViewFactory: Buildable {
         }
     }
     
-    private func makeNavigationView(title: String?, barViews: [KakaoNavigationItemView], completions: [(UIAction) -> Void] = [] ) -> UIView {
+    private func makeNavigationView(barViews: [KakaoNavigationItemView], completions: [(UIAction) -> Void] = [] ) -> UIView {
         switch self {
         case .home:
             return KakaoNavigationBar(frame: CGRect(), viewType: self, completions: completions)

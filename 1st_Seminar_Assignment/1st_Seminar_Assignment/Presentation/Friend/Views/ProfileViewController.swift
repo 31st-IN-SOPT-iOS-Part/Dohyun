@@ -11,11 +11,7 @@ final class ProfileViewController: NiblessViewController {
     
     // MARK: - UI Properties
     
-    private lazy var navigationBar = KakaoNavigationViewFactory.home(navTitle: nil,
-                                                                     barViews: [.xbutton(color: .white), .flexibleView],
-                                                                     completions: [{ [unowned self] _ in self.dismiss(animated: true)}])
-        .build()
-    
+    private lazy var navigationBar = KakaoNavigationViewFactory.home(barViews: [.xbutton(color: .white), .flexibleView],completions: [{ [unowned self] _ in self.dismiss(animated: true)}]).build()
     
     private lazy var profileImage = KakaoButtonFactory.profileButton(image: UIImage(named: "profile_userImg")!, completion: nil).build()
     

@@ -27,21 +27,17 @@ class KakaoNavigationBar: UIView {
     
     private func configureView(){
         
-        var flexIndex = 1
+        var flexIndex: [Int] = []
         var smallGapIdx: [Int] = []
         
         switch viewType {
-        case .home(let navTitle, let barViews, _):
-            
-            let label = UILabel().then {
-                $0.text = navTitle
-                $0.font = .preferredFont(forTextStyle: .title1)
-                $0.setContentHuggingPriority(.required, for: .horizontal)
-            }
-            
+        case .home(let barViews, _):
+        
             var navibarViews = barViews.enumerated().map { (index, view) -> UIView in
                
                 switch view {
+                case .label(let content):
+                    return content
                 case .smallGap(let width):
                     return UIView().then {
                         $0.backgroundColor = .clear
@@ -52,7 +48,8 @@ class KakaoNavigationBar: UIView {
                         smallGapIdx.append(index+1)
                     }
                 case .flexibleView:
-                    flexIndex += index
+                    flexIndex.append(index + 1)
+                    print(flexIndex)
                     return UIView().then {
                         $0.backgroundColor = .clear
                         $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -67,7 +64,6 @@ class KakaoNavigationBar: UIView {
                     }
                 }
             }
-            navibarViews.insert(label, at: 0)
             
             let navigationStackView = UIStackView(arrangedSubviews:navibarViews)
                 .then {
@@ -80,7 +76,8 @@ class KakaoNavigationBar: UIView {
                 .subviews.enumerated().forEach { (index, view) in
                     view.snp.makeConstraints { make in
                         make.top.bottom.equalToSuperview().inset(Constant.gap)
-                        if index != flexIndex && index != 0 {
+                        // 
+                        if flexIndex.contains(index) {
                             if !smallGapIdx.contains(index) {
                                 make.width.equalTo(Constant.navigationBarHeight - Constant.gap * 2)
                             }

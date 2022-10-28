@@ -20,6 +20,7 @@
 		B138765D28F717970091E36A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B138765C28F717970091E36A /* SnapKit */; };
 		B138766228F723B50091E36A /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = B138766128F723B50091E36A /* Then */; };
 		B19A554A28ED3F1A00EE11A1 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A554928ED3F1A00EE11A1 /* UITextField + Extension.swift */; };
+		B1A77AA628FA797D00B8AB6D /* SwiftyColor in Frameworks */ = {isa = PBXBuildFile; productRef = B1A77AA528FA797D00B8AB6D /* SwiftyColor */; };
 		B1AAA72428F81F0F006F7550 /* KakaoLabelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72328F81F0F006F7550 /* KakaoLabelFactory.swift */; };
 		B1AAA72628F81F25006F7550 /* NiblessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72528F81F25006F7550 /* NiblessViewController.swift */; };
 		B1AAA72828F820FE006F7550 /* KakaoButtonFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AAA72728F820FE006F7550 /* KakaoButtonFactory.swift */; };
@@ -68,6 +69,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B138765D28F717970091E36A /* SnapKit in Frameworks */,
+				B1A77AA628FA797D00B8AB6D /* SwiftyColor in Frameworks */,
 				B138766228F723B50091E36A /* Then in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +231,7 @@
 			packageProductDependencies = (
 				B138765C28F717970091E36A /* SnapKit */,
 				B138766128F723B50091E36A /* Then */,
+				B1A77AA528FA797D00B8AB6D /* SwiftyColor */,
 			);
 			productName = 1st_Seminar_Assignment;
 			productReference = B12A2E1028EACEBB0038426D /* 1st_Seminar_Assignment.app */;
@@ -261,6 +264,7 @@
 			packageReferences = (
 				B138765B28F717970091E36A /* XCRemoteSwiftPackageReference "SnapKit" */,
 				B138766028F723B50091E36A /* XCRemoteSwiftPackageReference "Then" */,
+				B1A77AA428FA797D00B8AB6D /* XCRemoteSwiftPackageReference "SwiftyColor" */,
 			);
 			productRefGroup = B12A2E1128EACEBB0038426D /* Products */;
 			projectDirPath = "";
@@ -534,6 +538,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		B1A77AA428FA797D00B8AB6D /* XCRemoteSwiftPackageReference "SwiftyColor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/SwiftyColor.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -546,6 +558,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B138766028F723B50091E36A /* XCRemoteSwiftPackageReference "Then" */;
 			productName = Then;
+		};
+		B1A77AA528FA797D00B8AB6D /* SwiftyColor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B1A77AA428FA797D00B8AB6D /* XCRemoteSwiftPackageReference "SwiftyColor" */;
+			productName = SwiftyColor;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
