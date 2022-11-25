@@ -47,8 +47,6 @@ final class LoginViewController: NiblessViewController {
             [weak self] _ in self?.mode == .login ? self?.gotoSignUpViewController() : self?.gotoFinishViewController()}
         .build()
     
-    
-    // iOS 15+ 부터 할 수 있는 방법으로 해보기
     private lazy var findIdOrPasswordButton = KakaoButtonFactory
         .noBorderButton(title: "카카오계정 또는 비밀번호 찾기")
         .build()
@@ -84,7 +82,13 @@ extension LoginViewController {
     // MARK: - UI Autolayout
     
     private func setupConstraint() {
-        
+        setLoginLabelLayout()
+        setEmailTextFieldLayout()
+        setPasswordTextFieldLayout()
+        setButtonLayout()
+    }
+    
+    private func setLoginLabelLayout() {
         loginPageTitleLabel.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(Constant.padding)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(Constant.bigGap)
@@ -98,12 +102,18 @@ extension LoginViewController {
             }
         }
         
+
+    }
+    
+    private func setEmailTextFieldLayout() {
         emailTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(Constant.padding)
             make.top.equalTo(loginPageDescription.snp.bottom).offset(Constant.gap)
             make.height.equalTo(Constant.textFieldHeight)
         }
-        
+    }
+    
+    private func setPasswordTextFieldLayout() {
         passwordTextField.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(Constant.padding)
             make.top.equalTo(emailTextField.snp.bottom).offset(Constant.gap)
@@ -115,7 +125,9 @@ extension LoginViewController {
             make.top.equalTo(passwordTextField.snp.bottom).offset(Constant.gap)
             make.height.equalTo(mode == .login ? 0 : Constant.textFieldHeight)
         }
-        
+    }
+    
+    private func setButtonLayout() {
         loginButton.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(Constant.padding)
             make.height.equalTo(Constant.buttonHeight)
@@ -127,9 +139,7 @@ extension LoginViewController {
             make.height.equalTo(Constant.buttonHeight)
             make.top.equalTo(loginButton.snp.bottom).offset(Constant.gap)
         }
-        
     }
-    
     
     // MARK: - Transition Function
     

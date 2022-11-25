@@ -7,6 +7,12 @@
 
 import UIKit
 
+struct Friend {
+    var imageURL: String?
+    var name: String
+    var description: String?
+}
+
 final class FriendTableViewController: NiblessViewController {
     
     // MARK: - UI Properties
@@ -14,11 +20,12 @@ final class FriendTableViewController: NiblessViewController {
     private lazy var navigationBar = KakaoNavigationViewFactory.home(
         barViews: [.flexibleView, .title(content: "HELLO"),.flexibleView]).build()
     
-    private lazy var profileView = KakaoButtonFactory.profileButton(image: UIImage(named: "profile_userImg")!) { _ in
-        let vc = ProfileViewController()
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
-    }.build()
+    private lazy var friendTableView: UITableView = {
+       let tableview = UITableView()
+        return tableview
+    }()
+    
+    private var datasource: UITableViewDiffableDataSource<Int, UUID>!
 
     
     // MARK: - LifeCycle & Init
@@ -40,7 +47,7 @@ final class FriendTableViewController: NiblessViewController {
 extension FriendTableViewController {
     
     private func configureView() {
-        component += [navigationBar, profileView]
+        component += [navigationBar]
         component.forEach { view.addSubview($0)}
         setupConstraint()
     }
@@ -49,12 +56,6 @@ extension FriendTableViewController {
         navigationBar.snp.makeConstraints { make in
             make.height.equalTo(Constant.navigationBarHeight)
             make.top.left.right.equalTo(view.safeAreaLayoutGuide)
-        }
-        
-        profileView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(Constant.padding)
-            make.top.equalTo(navigationBar.snp.bottom).offset(Constant.bigGap)
-            make.width.height.equalTo(Constant.profileImageHeight)
         }
     }
 }

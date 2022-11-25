@@ -27,7 +27,7 @@ final class KakaoNavigationBar: UIView {
     
     private func configureView(){
         
-        var flexIndex: [Int] = []
+        var flexibleViewIndex: [Int] = []
         var smallGapIdx: [Int] = []
         var viewWidth: [CGFloat]  = []
         
@@ -36,46 +36,22 @@ final class KakaoNavigationBar: UIView {
             let navibarViews = barViews.enumerated().map { (index, view) -> UIView in
                 switch view {
                 case .title(let content):
-                    let content = UILabel().then {
-                        $0.text = content
-                        $0.font = .preferredFont(forTextStyle: .title1)
-                    }
-                    
-                    viewWidth.append(content.intrinsicContentSize.width)
-                    
-                    content.snp.makeConstraints { make in
-                        make.width.equalTo(content.intrinsicContentSize.width)
-                    }
-                    
-                    content.setContentCompressionResistancePriority(.required, for: .horizontal)
-                    content.setContentHuggingPriority(.required, for: .horizontal)
-                    return content
-                    
+                    return setLabelContent(content: content, viewWidth: &viewWidth)
                 case .smallGap(let width):
-                    viewWidth.append(width)
-                    return UIView().then {
-                        $0.backgroundColor = .blue
-                        $0.snp.makeConstraints { make in
-                            make.width.equalTo(width)
-                        }
-                        
-                        $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-                        smallGapIdx.append(index)
-                    }
-                    
+                    return setSmallGap(width: width, index: index, viewWidth: &viewWidth, smallGapIdx: &smallGapIdx)
                 case .flexibleView:
-                    flexIndex.append(index)
+                    flexibleViewIndex.append(index)
                     return UIView().then {
                         $0.backgroundColor = .red
                         $0.setContentHuggingPriority(.defaultLow, for: .horizontal)
+                        $0.translatesAutoresizingMaskIntoConstraints = false
                     }
                     
                 case .setting, .xbutton:
                     return UIButton().then {
                         $0.setBackgroundImage(view.image!, for: .normal)
-                        $0.snp.makeConstraints { make in
-                            make.width.equalTo(Constant.navigationBarHeight - Constant.gap * 2)
-                        }
+                        $0.translatesAutoresizingMaskIntoConstraints = false
+                        $0.widthAnchor.constraint(equalToConstant: Constant.navigationBarHeight - Constant.gap * 2).isActive = true
                         $0.setContentHuggingPriority(.required, for: .horizontal)
                         viewWidth.append(Constant.navigationBarHeight - Constant.gap * 2)
                         
@@ -86,33 +62,74 @@ final class KakaoNavigationBar: UIView {
                 }
             }
             
-            let navigationStackView = UIStackView(arrangedSubviews:navibarViews)
-                .then {
-                    $0.alignment = .center
-                    $0.axis = .horizontal
-                    $0.distribution = .fill
+            let navigationStackView = addNavigationStackView(in: navibarViews)
+            navigationStackView.subviews.enumerated().forEach { (index, view) in
+                    setSubviewOfStackView(index: index, view: view, flexibleviewIndex: flexibleViewIndex, viewWidth: viewWidth)
                 }
-            
-            navigationStackView
-                .subviews.enumerated().forEach { (index, view) in
-                    view.snp.makeConstraints { make in
-                        make.top.bottom.equalToSuperview().inset(Constant.gap)
-                        if flexIndex.contains(index) {
-                            
-                            make.width.equalToSuperview().offset(-(viewWidth.reduce(0, +) / CGFloat(viewWidth.count + 1))).dividedBy(flexIndex.count)
-                        }
-                }
-            }
-            
-            self.addSubview(navigationStackView)
-            navigationStackView.snp.makeConstraints { make in
-                make.left.right.equalToSuperview().inset(Constant.padding)
-                make.top.bottom.equalToSuperview()
-            }
-            
-        
         }
         
+    }
+    
+    private func setSubviewOfStackView(index: Int, view: UIView, flexibleviewIndex: [Int], viewWidth: [CGFloat]) {
+        view.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview().inset(Constant.gap)
+            if flexibleviewIndex.contains(index) {
+                make.width.equalToSuperview().offset(-(viewWidth.reduce(0, +) / CGFloat(viewWidth.count + 1))).dividedBy(flexibleviewIndex.count)
+            }
+        }
+    }
+    
+    private func setSmallGap(width: CGFloat, index: Int, viewWidth: inout [CGFloat], smallGapIdx: inout [Int]) -> UIView {
+        viewWidth.append(width)
+        return UIView().then {
+            $0.backgroundColor = .blue
+            
+            $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.widthAnchor.constraint(equalToConstant: width).isActive = true
+            
+            $0.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+            smallGapIdx.append(index)
+        }
+    }
+    
+    private func setLabelContent(content: String, viewWidth: inout [CGFloat]) -> UILabel {
+        let label = UILabel().then {
+            $0.text = content
+            $0.font = .preferredFont(forTextStyle: .title1)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        setLabelContraint(label: label)
+        viewWidth.append(label.intrinsicContentSize.width)
+        return label
+    }
+    
+    private func setLabelContraint(label: UILabel) {
+        label.widthAnchor.constraint(equalToConstant: label.intrinsicContentSize.width).isActive = true
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.setContentHuggingPriority(.required, for: .horizontal)
+    }
+    
+    private func addNavigationStackView(in views: [UIView]) -> UIStackView {
+        let navigationStackView = UIStackView(arrangedSubviews:views)
+            .then {
+                $0.alignment = .center
+                $0.axis = .horizontal
+                $0.distribution = .fill
+            }
+        setupStackViewLayout(with: navigationStackView)
+        return navigationStackView
+    }
+    
+    private func setupStackViewLayout(with navigationStackView: UIStackView){
+        self.addSubview(navigationStackView)
+        navigationStackView.translatesAutoresizingMaskIntoConstraints = false
+        [navigationStackView.topAnchor.constraint(equalTo: self.topAnchor),
+         navigationStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+         navigationStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constant.padding),
+         navigationStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Constant.padding),
+        ].forEach { $0.isActive = true
+        }
+
     }
     
     

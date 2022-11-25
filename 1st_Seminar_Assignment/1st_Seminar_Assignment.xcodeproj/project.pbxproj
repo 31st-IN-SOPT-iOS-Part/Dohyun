@@ -108,6 +108,7 @@
 		B19A554B28ED40F700EE11A1 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B1D65E4C29150E37004D1EC8 /* Chat */,
 				B19A554E28ED414200EE11A1 /* Custom */,
 				B19A554D28ED413900EE11A1 /* Auth */,
 				B1AAA73128F84B75006F7550 /* Friend */,
@@ -210,6 +211,13 @@
 				B1AAA72F28F84B63006F7550 /* ProfileViewController.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B1D65E4C29150E37004D1EC8 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

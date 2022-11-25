@@ -6,15 +6,13 @@
 //
 
 import UIKit
-import SnapKit
 
 extension UIView {
     static func makeDivider(backgroundColor: UIColor = .white) -> UIView {
         return UIView().then {
+            $0.translatesAutoresizingMaskIntoConstraints = false
             $0.backgroundColor = backgroundColor
-            $0.snp.makeConstraints { make in
-                make.height.equalTo(1)
-            }
+            $0.heightAnchor.constraint(equalToConstant: 1).isActive = true
         }
     }
 }
